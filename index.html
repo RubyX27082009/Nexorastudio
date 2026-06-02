@@ -114,7 +114,49 @@ heading: ['Outfit', 'sans-serif'],
 
         /* Active nav */
         .nav-link.active-link { color: #06B6D4 !important; }
-
+        
+        /* Dark Mode */
+body.dark-mode {
+    background-color: #0a0a0a;
+    color: #e2e8f0;
+}
+body.dark-mode #navbar {
+    background-color: rgba(10,10,10,0.95) !important;
+    border-color: #1e293b;
+}
+body.dark-mode .bg-white {
+    background-color: #111111 !important;
+}
+body.dark-mode .bg-light {
+    background-color: #0d0d0d !important;
+}
+body.dark-mode .bg-primary {
+    background-color: #0F172A !important;
+}
+body.dark-mode .text-slate-600,
+body.dark-mode .text-slate-500,
+body.dark-mode .text-slate-400 {
+    color: #94a3b8 !important;
+}
+body.dark-mode .text-primary {
+    color: #f1f5f9 !important;
+}
+body.dark-mode .border-slate-100,
+body.dark-mode .border-slate-200 {
+    border-color: #1e293b !important;
+}
+body.dark-mode input,
+body.dark-mode select,
+body.dark-mode textarea {
+    background-color: #1e293b !important;
+    border-color: #334155 !important;
+    color: #f1f5f9 !important;
+}
+body.dark-mode .shadow-sm,
+body.dark-mode .shadow-xl {
+    box-shadow: 0 4px 20px rgba(0,0,0,0.4) !important;
+}
+        
         /* Gradient hero text */
 
         /* FAQ accordion */
@@ -194,6 +236,9 @@ heading: ['Outfit', 'sans-serif'],
                     <a href="#contact" class="hidden md:inline-flex items-center gap-2 px-6 py-2.5 bg-primary text-white rounded-lg font-semibold text-sm hover:bg-accent transition-colors duration-300 shadow-md shadow-primary/20">
                         Start Project <i data-lucide="arrow-right" class="w-4 h-4"></i>
                     </a>
+                    <button id="theme-toggle" class="p-2 rounded-lg text-primary hover:text-accent transition-colors focus:outline-none" aria-label="Toggle theme">
+    <i data-lucide="moon" id="theme-icon" class="w-5 h-5"></i>
+</button>
                     <button id="mobile-menu-btn" class="md:hidden text-primary p-2 focus:outline-none" aria-label="Menu">
                         <i data-lucide="menu" class="w-6 h-6"></i>
                     </button>
@@ -1024,6 +1069,25 @@ document.getElementById('contact-form').addEventListener('submit', function(e) {
                 navbar.classList.remove('shadow-md');
             }
         });
+        
+        // ---- Dark Mode Toggle ----
+const themeToggle = document.getElementById('theme-toggle');
+const themeIcon = document.getElementById('theme-icon');
+const savedTheme = localStorage.getItem('theme');
+
+if (savedTheme === 'dark') {
+    document.body.classList.add('dark-mode');
+    themeIcon.setAttribute('data-lucide', 'sun');
+    lucide.createIcons();
+}
+
+themeToggle.addEventListener('click', () => {
+    document.body.classList.toggle('dark-mode');
+    const isDark = document.body.classList.contains('dark-mode');
+    themeIcon.setAttribute('data-lucide', isDark ? 'sun' : 'moon');
+    localStorage.setItem('theme', isDark ? 'dark' : 'light');
+    lucide.createIcons();
+});
     </script>
 
 </body>
