@@ -1237,15 +1237,20 @@ function setTheme(isDark) {
 setTheme(savedTheme === 'dark');
 
 // ---- Pricing Card Touch Effect ----
+
+// Remove card-touched when tapping anywhere outside pricing cards
+document.addEventListener('touchstart', function(e) {
+    if (!e.target.closest('.pricing-card')) {
+        document.querySelectorAll('.pricing-card').forEach(c => c.classList.remove('card-touched'));
+    }
+}, { passive: true });
+
 document.querySelectorAll('.pricing-card').forEach(card => {
     card.addEventListener('touchstart', function() {
         document.querySelectorAll('.pricing-card').forEach(c => c.classList.remove('card-touched'));
         this.classList.add('card-touched');
     }, { passive: true });
-    card.addEventListener('touchend', function() {
-        const self = this;
-        setTimeout(() => { self.classList.remove('card-touched'); }, 700);
-    }, { passive: true });
+    card.addEventListener('touchend', function() {}, { passive: true });
 });
 
 // Toggle on click
