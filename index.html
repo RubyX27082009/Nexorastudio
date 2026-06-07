@@ -204,12 +204,14 @@ heading: ['Outfit', 'sans-serif'],
 
         /* Pricing cards */
         body.dark-mode .pricing-card {
-            border-color: #1a1a1a !important;
-            transition: border-color 0.3s ease !important;
-        }
-        body.dark-mode .pricing-card:hover {
-            border-color: #06B6D4 !important;
-        }
+    border-color: #1a1a1a !important;
+    transition: border-color 0.4s cubic-bezier(0.4,0,0.2,1), transform 0.35s cubic-bezier(0.4,0,0.2,1), box-shadow 0.35s cubic-bezier(0.4,0,0.2,1) !important;
+}
+body.dark-mode .pricing-card.card-touched {
+    border-color: #06B6D4 !important;
+    box-shadow: 0 0 0 1px rgba(6,182,212,0.3), 0 20px 40px rgba(6,182,212,0.1) !important;
+    transform: translateY(-6px) !important;
+}
         body.dark-mode .pricing-premium {
             background-color: #0F172A !important;
             border-color: #1a1a1a !important;
@@ -263,9 +265,25 @@ heading: ['Outfit', 'sans-serif'],
         body.dark-mode #footer-logo-text {
             color: #ffffff !important;
         }
-        body.dark-mode #footer-logo-dot {
-            color: #06B6D4 !important;
-        }
+        /* Dark mode hero badge border */
+body.dark-mode .inline-flex.border {
+    border-color: rgba(255,255,255,0.2) !important;
+    background-color: rgba(255,255,255,0.05) !important;
+}
+        
+        /* Light mode pricing card touch */
+body:not(.dark-mode) .pricing-card {
+    transition: border-color 0.4s cubic-bezier(0.4,0,0.2,1), transform 0.35s cubic-bezier(0.4,0,0.2,1), box-shadow 0.35s cubic-bezier(0.4,0,0.2,1) !important;
+}
+body:not(.dark-mode) .pricing-card.card-touched {
+    border-color: #06B6D4 !important;
+    box-shadow: 0 0 0 1px rgba(6,182,212,0.3), 0 20px 40px rgba(6,182,212,0.1) !important;
+    transform: translateY(-6px) !important;
+}
+body.dark-mode .pricing-card.card-touched {
+    border-color: #06B6D4 !important;
+    transform: translateY(-6px) !important;
+}
         
         /* Gradient hero text */
 
@@ -353,7 +371,7 @@ heading: ['Outfit', 'sans-serif'],
         }
     </style>
 </head>
-<body class="font-sans text-slate-800 font-light bg-white antialiased overflow-x-hidden">
+<body class="font-sans text-slate-800 font-light bg-white antialiased overflow-x-hidden"><script>if(localStorage.getItem('theme')==='dark'){document.body.classList.add('dark-mode');document.documentElement.style.backgroundColor='#000000';}</script>
 
     <!-- ========== NAVBAR ========== -->
     <header id="navbar" class="fixed w-full top-0 z-50 transition-all duration-300 bg-white/95 backdrop-blur-md border-b border-slate-100 py-4">
@@ -696,11 +714,11 @@ heading: ['Outfit', 'sans-serif'],
         <p class="text-sm text-slate-400 mt-1">One-time payment</p>
     </div>
     <ul class="space-y-3 mb-8">
-        <li class="pricing-feature flex items-center gap-3 text-sm text-slate-700"><i data-lucide="check" class="w-4 h-4 text-accent flex-shrink-0"></i> Up to 5 Pages</li>
-        <li class="pricing-feature flex items-center gap-3 text-sm text-slate-700"><i data-lucide="check" class="w-4 h-4 text-accent flex-shrink-0"></i> Mobile Responsive</li>
-        <li class="pricing-feature flex items-center gap-3 text-sm text-slate-700"><i data-lucide="check" class="w-4 h-4 text-accent flex-shrink-0"></i> Contact Form</li>
-        <li class="pricing-feature flex items-center gap-3 text-sm text-slate-700"><i data-lucide="check" class="w-4 h-4 text-accent flex-shrink-0"></i> Basic SEO Setup</li>
-        <li class="pricing-feature flex items-center gap-3 text-sm text-slate-700"><i data-lucide="check" class="w-4 h-4 text-accent flex-shrink-0"></i> 1 Week Free Support</li>
+        <li class="pricing-feature flex items-center gap-3 text-sm text-slate-800"><i data-lucide="check" class="w-4 h-4 text-accent flex-shrink-0"></i> Up to 5 Pages</li>
+        <li class="pricing-feature flex items-center gap-3 text-sm text-slate-800"><i data-lucide="check" class="w-4 h-4 text-accent flex-shrink-0"></i> Mobile Responsive</li>
+        <li class="pricing-feature flex items-center gap-3 text-sm text-slate-800"><i data-lucide="check" class="w-4 h-4 text-accent flex-shrink-0"></i> Contact Form</li>
+        <li class="pricing-feature flex items-center gap-3 text-sm text-slate-800"><i data-lucide="check" class="w-4 h-4 text-accent flex-shrink-0"></i> Basic SEO Setup</li>
+        <li class="pricing-feature flex items-center gap-3 text-sm text-slate-800"><i data-lucide="check" class="w-4 h-4 text-accent flex-shrink-0"></i> 1 Week Free Support</li>
     </ul>
     <a href="#contact" class="pricing-btn mt-auto block w-full text-center px-6 py-3 rounded-xl bg-primary text-white font-semibold hover:bg-primary transition-all duration-300 text-sm">
         Get Started
@@ -718,12 +736,12 @@ heading: ['Outfit', 'sans-serif'],
         <p class="text-sm text-slate-400 mt-1">One-time payment</p>
     </div>
     <ul class="space-y-3 mb-8">
-        <li class="pricing-feature flex items-center gap-3 text-sm text-slate-700"><i data-lucide="check" class="w-4 h-4 text-accent flex-shrink-0"></i> Up to 10 Pages</li>
-        <li class="pricing-feature flex items-center gap-3 text-sm text-slate-700"><i data-lucide="check" class="w-4 h-4 text-accent flex-shrink-0"></i> Mobile Responsive</li>
-        <li class="pricing-feature flex items-center gap-3 text-sm text-slate-700"><i data-lucide="check" class="w-4 h-4 text-accent flex-shrink-0"></i> Contact & Booking Forms</li>
-        <li class="pricing-feature flex items-center gap-3 text-sm text-slate-700"><i data-lucide="check" class="w-4 h-4 text-accent flex-shrink-0"></i> Full SEO Optimization</li>
-        <li class="pricing-feature flex items-center gap-3 text-sm text-slate-700"><i data-lucide="check" class="w-4 h-4 text-accent flex-shrink-0"></i> Custom Animations</li>
-        <li class="pricing-feature flex items-center gap-3 text-sm text-slate-700"><i data-lucide="check" class="w-4 h-4 text-accent flex-shrink-0"></i> 1 Month Free Support</li>
+        <li class="pricing-feature flex items-center gap-3 text-sm text-slate-800"><i data-lucide="check" class="w-4 h-4 text-accent flex-shrink-0"></i> Up to 10 Pages</li>
+        <li class="pricing-feature flex items-center gap-3 text-sm text-slate-800"><i data-lucide="check" class="w-4 h-4 text-accent flex-shrink-0"></i> Mobile Responsive</li>
+        <li class="pricing-feature flex items-center gap-3 text-sm text-slate-800"><i data-lucide="check" class="w-4 h-4 text-accent flex-shrink-0"></i> Contact & Booking Forms</li>
+        <li class="pricing-feature flex items-center gap-3 text-sm text-slate-800"><i data-lucide="check" class="w-4 h-4 text-accent flex-shrink-0"></i> Full SEO Optimization</li>
+        <li class="pricing-feature flex items-center gap-3 text-sm text-slate-800"><i data-lucide="check" class="w-4 h-4 text-accent flex-shrink-0"></i> Custom Animations</li>
+        <li class="pricing-feature flex items-center gap-3 text-sm text-slate-800"><i data-lucide="check" class="w-4 h-4 text-accent flex-shrink-0"></i> 1 Month Free Support</li>
     </ul>
     <a href="#contact" class="pricing-btn mt-auto block w-full text-center px-6 py-3 rounded-xl bg-primary text-white font-semibold hover:bg-primary transition-all duration-300 text-sm">
         Get Started
@@ -1217,6 +1235,18 @@ function setTheme(isDark) {
 
 // Set correct theme on page load
 setTheme(savedTheme === 'dark');
+
+// ---- Pricing Card Touch Effect ----
+document.querySelectorAll('.pricing-card').forEach(card => {
+    card.addEventListener('touchstart', function() {
+        document.querySelectorAll('.pricing-card').forEach(c => c.classList.remove('card-touched'));
+        this.classList.add('card-touched');
+    }, { passive: true });
+    card.addEventListener('touchend', function() {
+        const self = this;
+        setTimeout(() => { self.classList.remove('card-touched'); }, 700);
+    }, { passive: true });
+});
 
 // Toggle on click
 themeToggle.addEventListener('click', () => {
