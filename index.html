@@ -391,6 +391,34 @@ body.dark-mode .pricing-card.card-touched {
             color: #ffffff !important;
             text-shadow: 0 0 8px rgba(255,255,255,0.4);
         }
+        /* Light mode – dark text shining against white/light backgrounds */
+        body:not(.dark-mode) .bg-white h1,
+        body:not(.dark-mode) .bg-white h2,
+        body:not(.dark-mode) .bg-white h3,
+        body:not(.dark-mode) .bg-white h4,
+        body:not(.dark-mode) .bg-light h1,
+        body:not(.dark-mode) .bg-light h2,
+        body:not(.dark-mode) .bg-light h3,
+        body:not(.dark-mode) .bg-light h4 {
+            color: #0F172A !important;
+            text-shadow: 0 0 1px rgba(15, 23, 42, 0.15) !important;
+        }
+        body:not(.dark-mode) .text-primary {
+            color: #0F172A !important;
+            text-shadow: 0 0 1px rgba(15, 23, 42, 0.15) !important;
+        }
+        body:not(.dark-mode) .text-slate-700 {
+            color: #0F172A !important;
+            text-shadow: 0 0 1px rgba(15, 23, 42, 0.1) !important;
+        }
+        body:not(.dark-mode) .text-slate-600 {
+            color: #1e293b !important;
+            text-shadow: 0 0 1px rgba(15, 23, 42, 0.08) !important;
+        }
+        body:not(.dark-mode) .text-slate-500 {
+            color: #334155 !important;
+            text-shadow: 0 0 1px rgba(15, 23, 42, 0.08) !important;
+        }
     </style>
 </head>
 <body class="font-sans text-slate-800 font-light bg-white antialiased overflow-x-hidden"><script>if(localStorage.getItem('theme')==='dark'){document.body.classList.add('dark-mode');document.documentElement.style.backgroundColor='#000000';}</script>
