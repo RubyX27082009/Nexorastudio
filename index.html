@@ -92,7 +92,7 @@ heading: ['Outfit', 'sans-serif'],
         /* WhatsApp float */
         .whatsapp-float {
             position: fixed;
-            bottom: 28px;
+            bottom: 110px;
             right: 28px;
             background-color: #25D366;
             color: white;
@@ -1488,6 +1488,92 @@ document.querySelectorAll('.pricing-card').forEach(card => {
 themeToggle.addEventListener('click', () => {
     const isDark = document.body.classList.contains('dark-mode');
     setTheme(!isDark);
+});
+
+// ---- Draggable WhatsApp Button (long-press to move) ----
+const waBtn = document.querySelector('.whatsapp-float');
+let isDragging = false, offsetX, offsetY, pressTimer, moved = false;
+const LONG_PRESS_MS = 400;
+
+function startDrag(x, y) {
+    isDragging = true;
+    moved = false;
+    const rect = waBtn.getBoundingClientRect();
+    offsetX = x - rect.left;
+    offsetY = y - rect.top;
+    waBtn.style.transition = 'none';
+    waBtn.classList.add('wa-dragging');
+}
+
+function moveDrag(x, y) {
+    if (!isDragging) return;
+    moved = true;
+    waBtn.style.left = (x - offsetX) + 'px';
+    waBtn.style.top = (y - offsetY) + 'px';
+    waBtn.style.right = 'auto';
+    waBtn.style.bottom = 'auto';
+}
+
+function endDrag() {
+    isDragging = false;
+    waBtn.style.transition = 'transform 0.3s ease, box-shadow 0.3s ease';
+    waBtn.classList.remove('wa-dragging');
+}
+
+function cancelPressTimer() {
+    clearTimeout(pressTimer);
+}
+
+// ---- Touch (mobile) ----
+waBtn.addEventListener('touchstart', (e) => {
+    const t = e.touches[0];
+    const startX = t.clientX, startY = t.clientY;
+    pressTimer = setTimeout(() => {
+        startDrag(startX, startY);
+    }, LONG_PRESS_MS);
+}, { passive: true });
+
+waBtn.addEventListener('touchmove', (e) => {
+    if (!isDragging) {
+        cancelPressTimer(); // finger moved before long-press fired = scrolling, not dragging
+        return;
+    }
+    const t = e.touches[0];
+    moveDrag(t.clientX, t.clientY);
+}, { passive: true });
+
+waBtn.addEventListener('touchend', (e) => {
+    cancelPressTimer();
+    if (isDragging) {
+        endDrag();
+    }
+});
+
+// ---- Mouse (desktop) ----
+waBtn.addEventListener('mousedown', (e) => {
+    const startX = e.clientX, startY = e.clientY;
+    pressTimer = setTimeout(() => {
+        startDrag(startX, startY);
+    }, LONG_PRESS_MS);
+});
+
+document.addEventListener('mousemove', (e) => {
+    if (isDragging) moveDrag(e.clientX, e.clientY);
+});
+
+document.addEventListener('mouseup', (e) => {
+    cancelPressTimer();
+    if (isDragging) {
+        endDrag();
+        if (moved) e.preventDefault();
+    }
+});
+
+waBtn.addEventListener('click', (e) => {
+    if (moved) {
+        e.preventDefault(); // don't open WhatsApp right after a drag
+        moved = false;
+    }
 });
     </script>
 
